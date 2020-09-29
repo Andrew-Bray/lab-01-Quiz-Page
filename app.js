@@ -1,8 +1,11 @@
-import { countsAsAYes } from './confirming-a-yes.js';
+import { countsAsAYes } from './counts-as-a-yes.js';
+import { roundedPercentage } from './percentage.js';
 //WHEN: Adding an event listener listening to the click of the button.
 const launchButton = document.getElementById('launch-button');
 const results = document.getElementById('results');
 const followUp = document.getElementById('follow-up');
+const percentage = document.getElementById('percentage');
+const hidden = document.getElementById('hidden');
 
 launchButton.addEventListener('click', () => {
     const userName = prompt('How would you like to be called?');
@@ -32,7 +35,7 @@ launchButton.addEventListener('click', () => {
         correctAnswers++;
     }
 
-    const responseThree = prompt(`And lastly, do Drones get evcted at th´end of the season?`)
+    const responseThree = prompt(`And lastly, do Drones get evicted at the end of the season?`)
 
     //user is correct!
     if (countsAsAYes(responseThree)) {
@@ -48,8 +51,12 @@ launchButton.addEventListener('click', () => {
 
     results.textContent = `Hey ${userName}, you got ${correctAnswers} right out of 3.`;
 
+    percentage.textContent = `Thats ${roundedPercentage(correctAnswers)} correct.`;
+
     if (correctAnswers === 3) {
         followUp.textContent = 'It feels good to know it all, right?';
+        hidden.classList.remove('hidden');
+
     } else if (correctAnswers === 2) {
         followUp.textContent = 'You\'d make a so-so queen.';
     } else if (correctAnswers === 1) {
